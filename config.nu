@@ -27,3 +27,6 @@ $env.config.hooks.env_change.PWD = (
 # starship enable
 mkdir ($nu.data-dir | path join "vendor/autoload")
 starship init nu | save -f ($nu.data-dir | path join "vendor/autoload/starship.nu")
+
+# zoxide enable
+source ~/.zoxide.nu
