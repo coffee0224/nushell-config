@@ -5,11 +5,9 @@
 
 use keybindings.nu keybindings
 use theme.nu *
-use ~/.cache/starship/init.nu
 use bash-env.nu
 
 source aliases.nu
-source ~/.cache/zoxide/init.nu
 
 $env.config = { 
     show_banner: false
@@ -22,10 +20,6 @@ $env.config = {
     color_config: $dark_theme
 }
 
-$env.config.hooks.env_change.PWD = { ||
-    if (which direnv | is-empty) {
-        return
-    }
-
-    direnv export json | from json | default {} | load-env
-}  
+$env.config.hooks.env_change.PWD = (
+    try {$env.config.hooks.env_change.PWD} catch { [] } | append (source direnv.nu)
+)
