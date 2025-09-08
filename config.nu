@@ -23,3 +23,7 @@ $env.config = {
 $env.config.hooks.env_change.PWD = (
     try {$env.config.hooks.env_change.PWD} catch { [] } | append (source direnv.nu)
 )
+
+# starship enable
+mkdir ($nu.data-dir | path join "vendor/autoload")
+starship init nu | save -f ($nu.data-dir | path join "vendor/autoload/starship.nu")
